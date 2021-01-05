@@ -1,0 +1,15 @@
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+    public: true
+
+  quote.api.doctrine.dbal.author.projection:
+    class: Quote\Api\Infrastructure\Persistence\Dbal\Author\DbalAuthorProjection
+    arguments:
+      - '@doctrine.dbal.default_connection'
+
+  quote.api.doctrine.dbal.quote.projection:
+    class: Quote\Api\Infrastructure\Persistence\Dbal\Quote\DbalQuoteProjection
+    arguments:
+      - '@doctrine.dbal.default_connection'

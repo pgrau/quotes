@@ -1,0 +1,4 @@
+quote.api.route.ping:
+  path: /
+  defaults: { _controller: quote.api.controller.ping}
+  methods:  [GET]

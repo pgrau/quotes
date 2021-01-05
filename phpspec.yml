@@ -1,0 +1,5 @@
+code_generation: false
+suites:
+  name:
+    spec_path: tests
+    src_path: src

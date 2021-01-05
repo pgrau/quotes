@@ -1,0 +1,16 @@
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+    public: true
+
+  quote.api.command.import.authors:
+    class: Quote\Api\Application\Command\ImportAuthors\ImportAuthorsCommandHandler
+    arguments:
+      - '@event.bus'
+
+  quote.api.command.import.quotes:
+    class: Quote\Api\Application\Command\ImportQuotes\ImportQuotesCommandHandler
+    arguments:
+      - '@event.bus'
+      - '@quote.api.doctrine.author.repository'

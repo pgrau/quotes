@@ -1,0 +1,8 @@
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+    public: true
+
+  quote.api.controller.ping:
+    class: Quote\Api\Infrastructure\UI\Controller\Ping\PingController

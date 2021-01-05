@@ -1,0 +1,11 @@
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+    public: true
+
+  quote.api.doctrine.author.repository:
+    class: Quote\Api\Infrastructure\Persistence\Doctrine\Author\DoctrineAuhorRepository
+    factory: ['@doctrine.orm.default_entity_manager', getRepository]
+    arguments:
+      - Quote\Api\Domain\Model\Author\Author

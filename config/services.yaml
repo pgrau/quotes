@@ -1,0 +1,120 @@
+parameters:
+    rabbitmq.vhost: '%env(RABBITMQ_VHOST)%'
+    rabbitmq.host: '%env(RABBITMQ_HOST)%'
+    rabbitmq.port: '%env(RABBITMQ_PORT)%'
+    rabbitmq.login: '%env(RABBITMQ_LOGIN)%'
+    rabbitmq.password: '%env(RABBITMQ_PASSWORD)%'
+    rabbitmq.exchange: '%env(RABBITMQ_EXCHANGE)%'
+    rabbitmq.max_retries: '%env(RABBITMQ_MAX_RETRIES)%'
+    rabbitmq.queues: '%env(RABBITMQ_QUEUES)%'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        public: true
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    Quote\:
+        resource: '../src/'
+        autowire: false
+        autoconfigure: false
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    Quote\Api\Infrastructure\UI\Controller\:
+        resource: '../src/Api/Infrastructure/UI/Controller/'
+        tags: ['controller.service_arguments']
+
+    rabbitmq.connection:
+        class: Quote\Shared\Infrastructure\MessageBroker\RabbitMq\RabbitMqConnection
+        factory: ['Quote\Shared\Infrastructure\MessageBroker\RabbitMq\RabbitMqFactoryConnection', create]
+        arguments: [
+            '%rabbitmq.vhost%',
+            '%rabbitmq.host%',
+            '%rabbitmq.port%',
+            '%rabbitmq.login%',
+            '%rabbitmq.password%'
+        ]
+
+    rabbitmq.configurer:
+        class: Quote\Shared\Infrastructure\MessageBroker\RabbitMq\RabbitMqConfigurer
+        factory: ['Quote\Shared\Infrastructure\MessageBroker\RabbitMq\RabbitMqFactoryConfigurer', create]
+        arguments:
+            - '@rabbitmq.connection'
+            - '%rabbitmq.queues%'
+
+    rabbitmq.publisher:
+        class: Quote\Shared\Infrastructure\MessageBroker\RabbitMq\RabbitMqPublisher
+        arguments:
+            - '@rabbitmq.connection'
+            - '%rabbitmq.exchange%'
+            - '@doctrine.dbal.event_not_published_store'
+
+    rabbitmq.consumer:
+        class: Quote\Shared\Infrastructure\MessageBroker\RabbitMq\RabbitMqDomainEventsConsumer
+        arguments:
+            - '@rabbitmq.connection'
+            - '%rabbitmq.exchange%'
+            - '%rabbitmq.max_retries%'
+            - '@doctrine.dbal.event_failed_store'
+
+    dispatcher.events:
+        class: Quote\Shared\Infrastructure\MessageBroker\Dispatcher
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@service_container'
+            - '@subscriber.mapper'
+
+    subscriber.mapper:
+        class: Quote\Shared\Infrastructure\MessageBroker\SubscriberMapper
+
+    doctrine.dbal.event_store:
+        class: Quote\Shared\Infrastructure\Persistence\Dbal\Event\DbalEventStore
+        arguments:
+            - '@doctrine.dbal.default_connection'
+
+    doctrine.dbal.event_failed_store:
+        class: Quote\Shared\Infrastructure\Persistence\Dbal\Event\DbalEventFailedStore
+        arguments:
+            - '@doctrine.dbal.default_connection'
+
+    doctrine.dbal.event_not_published_store:
+        class: Quote\Shared\Infrastructure\Persistence\Dbal\Event\DbalEventNotPublishedStore
+        arguments:
+            - '@doctrine.dbal.default_connection'
+
+    doctrine.query_sql_command:
+        class: Doctrine\DBAL\Tools\Console\Command\RunSqlCommand
+        arguments:
+            - '@Doctrine\Bundle\DoctrineBundle\Dbal\ManagerRegistryAwareConnectionProvider'
+        tags:
+            - { name: console.command, command: doctrine:query:sql }
+
+    command.bus:
+        class: Quote\Shared\Infrastructure\Bus\League\CommandBus
+        factory: [Quote\Shared\Infrastructure\Bus\League\CommandBusFactory, create]
+        arguments:
+            - '@service_container'
+
+    query.bus:
+        class: Quote\Shared\Infrastructure\Bus\League\QueryBus
+        factory: [Quote\Shared\Infrastructure\Bus\League\QueryBusFactory, create]
+        arguments:
+            - '@service_container'
+
+    event.bus:
+        class: Quote\Shared\Infrastructure\Bus\Custom\CustomEventBus
+        arguments:
+            - '@doctrine.dbal.event_store'
+            - '@rabbitmq.publisher'
+            - '@service_container'
+
+imports:
+    - { resource: controllers.yaml }
+    - { resource: commands.yaml }
+    - { resource: queries.yaml }
+    - { resource: sf_commands.yaml }
+    - { resource: subscribers.yaml }
+    - { resource: projections.yaml }
+    - { resource: repositories.yaml }

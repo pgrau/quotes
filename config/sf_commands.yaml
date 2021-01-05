@@ -1,0 +1,26 @@
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+    public: true
+
+  quote.api.shared.sf.command.rabbitmq.configure:
+    class: Quote\Shared\Infrastructure\UI\Command\MessageBroker\RabbitMqConfigureCommand
+    arguments:
+      - '@rabbitmq.configurer'
+
+  quote.api.shared.sf.command.rabbitmq.consumer:
+    class: Quote\Shared\Infrastructure\UI\Command\MessageBroker\RabbitMqConsumeDomainEventsCommand
+    arguments:
+      - '@rabbitmq.consumer'
+      - '@dispatcher.events'
+
+  quote.api.sf.command.import.authors:
+    class: Quote\Api\Infrastructure\UI\Command\Author\ImportAuthorsCommand
+    arguments:
+      - '@command.bus'
+
+  quote.api.sf.command.import.quotes:
+    class: Quote\Api\Infrastructure\UI\Command\Quote\ImportQuotesCommand
+    arguments:
+      - '@command.bus'

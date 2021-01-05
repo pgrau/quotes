@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  shared_rabbitmq:
+    container_name: quotes-rabbitmq
+    image: 'rabbitmq:3.8-management'
+    restart: unless-stopped
+    ports:
+      - 5630:5672
+      - 8090:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=guess
+      - RABBITMQ_DEFAULT_PASS=guess
+
+  shared_mysql:
+    container_name: quotes-mysql
+    image: mysql:8.0
+    ports:
+      - 3360:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    healthcheck:
+      test: ["CMD", "mysqladmin", "--user=root", "--password=", "--host=127.0.0.1", "ping", "--silent"]
+      interval: 2s
+      timeout: 10s
+      retries: 10
+    command: ["--default-authentication-plugin=mysql_native_password"]
+
+  shared_redis:
+    image: redis:6.0-alpine
+    container_name: quotes-redis
+    ports:
+      - 6380:6379
+
+  shared_php:
+    container_name: quotes-php
+    build: config/docker/php8
+    working_dir: /var/www
+    command: php -S 0.0.0.0:8080 -t public
+    ports:
+      - 8082:8080
+    volumes:
+      - .:/var/www
+    links:
+      - shared_mysql
+      - shared_rabbitmq
+      - shared_redis

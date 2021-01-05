@@ -1,0 +1,15 @@
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+    public: true
+
+  quote.api.subscriber.create.author:
+    class: Quote\Api\Domain\Event\Author\CreateAuthorSubscriber
+    arguments:
+      - '@quote.api.doctrine.dbal.author.projection'
+
+  quote.api.subscriber.create.quote:
+    class: Quote\Api\Domain\Event\Quote\CreateQuoteSubscriber
+    arguments:
+      - '@quote.api.doctrine.dbal.quote.projection'
