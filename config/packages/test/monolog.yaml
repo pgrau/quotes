@@ -1,0 +1,14 @@
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+            channels: ["!event", "!php", "!php_error", "!php_exception", "!error_report"]
+        errors_to_file:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%_error.log"
+            level: debug
+            channels: ["php"]
+
+
