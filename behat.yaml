@@ -1,0 +1,11 @@
+default:
+  extensions:
+    FriendsOfBehat\SymfonyExtension:
+      kernel:
+        class: Quote\Api\Infrastructure\Framework\Symfony\Kernel
+
+  suites:
+    environment_check:
+      paths: [ features/using_symfony ]
+      contexts:
+        - Quote\Api\Tests\Behat\Framework\SymfonyContext
