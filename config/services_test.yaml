@@ -1,0 +1,17 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Quote\Api\Tests\Behat\:
+    resource: '../tests/Behat/*'
+
+  Quote\Api\Tests\Behat\Framework\SymfonyContext:
+    public: true
+    arguments:
+      - "%kernel.environment%"
+
+  Quote\Api\Tests\Behat\ApiContext:
+    public: true
+    arguments:
+      - "@behat.mink.default_session"
