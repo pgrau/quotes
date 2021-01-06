@@ -5,7 +5,6 @@ default:
         class: Quote\Api\Infrastructure\Framework\Symfony\Kernel
 
   suites:
-    environment_check:
-      paths: [ features/using_symfony ]
+    default:
       contexts:
         - Quote\Api\Tests\Behat\Framework\SymfonyContext

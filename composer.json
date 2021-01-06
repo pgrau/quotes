@@ -24,6 +24,10 @@
     "symfony/proxy-manager-bridge": "5.2.*",
     "symfony/yaml": "*"
   },
+  "require-dev": {
+    "friends-of-behat/symfony-extension": "^2.0",
+    "phpspec/phpspec": "^7.0"
+  },
   "config": {
     "optimize-autoloader": true,
     "preferred-install": {
@@ -63,9 +67,5 @@
       "allow-contrib": false,
       "require": "5.2.*"
     }
-  },
-  "require-dev": {
-    "friends-of-behat/symfony-extension": "^2.0",
-    "phpspec/phpspec": "^7.0"
   }
 }
