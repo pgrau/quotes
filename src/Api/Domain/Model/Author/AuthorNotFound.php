@@ -12,7 +12,7 @@ class AuthorNotFound extends NotFoundException
 
     public static function byId(string $id): self
     {
-        $msg = \sprintf('Author %d not found', $id);
+        $msg = \sprintf('Author %s not found', $id);
 
         return new self($msg);
     }

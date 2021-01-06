@@ -6,3 +6,8 @@ services:
 
   quote.api.controller.ping:
     class: Quote\Api\Infrastructure\UI\Controller\Ping\PingController
+
+  quote.api.controller.get.quotes.by.author:
+    class: Quote\Api\Infrastructure\UI\Controller\GetQuotesByAuthor\GetQuotesByAuthorController
+    arguments:
+      - '@query.bus'

@@ -2,3 +2,8 @@ quote.api.route.ping:
   path: /
   defaults: { _controller: quote.api.controller.ping}
   methods:  [GET]
+
+quote.api.route.get.quotes.by.author:
+  path: /shout/{author_id}
+  defaults: { _controller: quote.api.controller.get.quotes.by.author}
+  methods:  [GET]

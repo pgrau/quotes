@@ -8,7 +8,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS `quote` (
   `id` CHAR(36) NOT NULL,
   `author_id` VARCHAR(255) NOT NULL,
-  `quote` VARCHAR(255) NOT NULL,
+  `quote` VARCHAR(1000) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_quote_author_id_idx` (`author_id` ASC) VISIBLE,
   CONSTRAINT `fk_quote_author_id`

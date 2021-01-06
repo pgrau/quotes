@@ -110,6 +110,19 @@ services:
             - '@rabbitmq.publisher'
             - '@service_container'
 
+    redis:
+        class: Redis
+        calls:
+            - ['connect', ['%env(REDIS_HOST)%', '%env(REDIS_PORT)%']]
+
+    redis.repository:
+        class: Quote\Shared\Infrastructure\Persistence\Redis\Cache\RedisCacheRepository
+        arguments:
+            - '@redis'
+
+    php.serializer:
+        class: Quote\Shared\Infrastructure\Serializer\PhpSerializer
+
 imports:
     - { resource: controllers.yaml }
     - { resource: commands.yaml }

@@ -3,3 +3,12 @@ services:
     autoconfigure: true
     autowire: true
     public: true
+
+  quote.api.query.get.quotes.by.author:
+    class: Quote\Api\Application\Query\GetQuotesByAuthor\GetQuotesByAuthorQueryHandler
+    arguments:
+      - '@rabbitmq.publisher'
+      - '@quote.api.doctrine.author.repository'
+      - '@quote.api.doctrine.quote.repository'
+      - '@redis.repository'
+      - '@php.serializer'
