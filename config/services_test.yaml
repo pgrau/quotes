@@ -10,3 +10,8 @@ services:
     public: true
     arguments:
       - "%kernel.environment%"
+
+  Quote\Api\Tests\Behat\ApiContext:
+    public: true
+    arguments:
+      - "@behat.mink.default_session"

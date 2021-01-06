@@ -3,9 +3,18 @@ default:
     FriendsOfBehat\SymfonyExtension:
       kernel:
         class: Quote\Api\Infrastructure\Framework\Symfony\Kernel
+    Behat\MinkExtension:
+      sessions:
+        symfony:
+          symfony: ~
 
   suites:
     framework_check:
       paths: [ features/environment_check ]
       contexts:
         - Quote\Api\Tests\Behat\Framework\SymfonyContext
+
+    health_check:
+      paths: [ features/health_check ]
+      contexts:
+        - Quote\Api\Tests\Behat\ApiContext
