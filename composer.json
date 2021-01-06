@@ -38,7 +38,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "spec\\Quote\\Api\\": "tests/spec/Quote/Api/"
+      "spec\\Quote\\Api\\": "tests/spec/Quote/Api/",
+      "Quote\\Api\\Tests\\Behat\\": "tests/Behat/"
     }
   },
   "replace": {
@@ -64,6 +65,7 @@
     }
   },
   "require-dev": {
+    "friends-of-behat/symfony-extension": "^2.0",
     "phpspec/phpspec": "^7.0"
   }
 }
