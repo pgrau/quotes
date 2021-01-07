@@ -38,7 +38,7 @@ class GetQuotesByAuthorController
 
         } catch (\Exception $e) {
 
-            return new JsonResponse(ApiError::create('TECHNICAL_ERROR', $e->getMessage())->toArray(), 500);
+            return new JsonResponse(ApiError::create('TECHNICAL_ERROR', 'Unexpected API error', 500));
         }
     }
 }

@@ -23,4 +23,15 @@ abstract class Database
 
         self::$conn->executeQuery('SET foreign_key_checks = 1');
     }
+
+    protected static function truncateTables(string... $tables): void
+    {
+        self::$conn->executeQuery('SET foreign_key_checks = 0');
+
+        foreach ($tables as $table) {
+            self::$conn->executeQuery('truncate table ' . $table);
+        }
+
+        self::$conn->executeQuery('SET foreign_key_checks = 1');
+    }
 }
