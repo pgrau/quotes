@@ -3,15 +3,28 @@ services:
     autowire: true
     autoconfigure: true
 
+  redis.repository:
+    class: Quote\Shared\Infrastructure\Persistence\FakeCacheRepository
+
   Quote\Api\Tests\Behat\:
     resource: '../tests/Behat/*'
 
-  Quote\Api\Tests\Behat\Framework\SymfonyContext:
+  Quote\Api\Tests\Behat\SymfonyContext:
     public: true
     arguments:
       - "%kernel.environment%"
+
+  Quote\Api\Tests\Behat\DatabaseQuoteContext:
+    public: true
+    arguments:
+      - '@doctrine.dbal.default_connection'
 
   Quote\Api\Tests\Behat\ApiContext:
     public: true
     arguments:
       - "@behat.mink.default_session"
+
+  Quote\Api\Tests\Behat\SymfonyApiContext:
+    public: true
+    arguments:
+      - "@test.client"

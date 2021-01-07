@@ -3,6 +3,8 @@ default:
     FriendsOfBehat\SymfonyExtension:
       kernel:
         class: Quote\Api\Infrastructure\Framework\Symfony\Kernel
+      bootstrap: config/behat/bootstrap.php
+
     Behat\MinkExtension:
       sessions:
         symfony:
@@ -12,9 +14,15 @@ default:
     framework_check:
       paths: [ features/environment_check ]
       contexts:
-        - Quote\Api\Tests\Behat\Framework\SymfonyContext
+        - Quote\Api\Tests\Behat\SymfonyContext
 
     health_check:
       paths: [ features/health_check ]
       contexts:
         - Quote\Api\Tests\Behat\ApiContext
+
+    quotes:
+      paths: [ features/quotes ]
+      contexts:
+        - Quote\Api\Tests\Behat\ApiContext
+        - Quote\Api\Tests\Behat\DatabaseQuoteContext

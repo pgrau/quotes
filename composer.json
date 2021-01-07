@@ -16,6 +16,8 @@
     "league/tactician-container": "^2.0",
     "ramsey/uuid": "^4.1",
     "ramsey/uuid-doctrine": "^1.6",
+    "react/child-process": "^0.6.1",
+    "react/react": "^1.1",
     "seld/signal-handler": "^1.2",
     "symfony/console": "*",
     "symfony/dotenv": "*",

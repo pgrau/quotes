@@ -1,17 +1,13 @@
 <?php
 
-namespace Quote\Api\Tests\Behat\Framework;
+namespace Quote\Api\Tests\Behat;
 
 use Behat\Behat\Context\Context;
 
 final class SymfonyContext implements Context
 {
-    /** @var string */
-    private $environment;
-
-    public function __construct(string $environment)
+    public function __construct(private string $environment)
     {
-        $this->environment = $environment;
     }
 
     /**
