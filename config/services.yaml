@@ -59,6 +59,9 @@ services:
             - '%rabbitmq.max_retries%'
             - '@doctrine.dbal.event_failed_store'
 
+    rabbitmq.process:
+        class: Quote\Shared\Infrastructure\MessageBroker\RabbitMq\RabbitMqUpDomainEventsConsumers
+
     dispatcher.events:
         class: Quote\Shared\Infrastructure\MessageBroker\Dispatcher
         arguments:
