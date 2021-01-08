@@ -200,3 +200,33 @@ src
                     ├── RabbitMqConsumeDomainEventsCommand.php
                     └── RabbitMqUpDomainEventsConsumers.php
 ``` 
+
+### 🎯 Command Bus
+
+We use command bus for all use cases need write
+
+All commands are executed with transactional mode
+
+[Example](src/Api/Infrastructure/UI/Command/Author/ImportAuthorsCommand.php):
+
+```
+final class ImportAuthorsCommand extends Command
+{
+    ....
+
+    public function __construct(private CommandBus $commandBus)
+    {
+    }
+    
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        ...
+        
+        $command = new \Quote\Api\Application\Command\ImportAuthors\ImportAuthorsCommand($data);
+
+        $this->commandBus->dispatch($command);
+
+        ...
+    }
+    
+```
