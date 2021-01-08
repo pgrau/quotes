@@ -212,7 +212,7 @@ All commands are executed with transactional mode
 ```
      ...
      
-     $command = new \Quote\Api\Application\Command\ImportAuthors\ImportAuthorsCommand($data);
+     $command = new ImportAuthorsCommand($data);
 
      $this->commandBus->dispatch($command);
 
