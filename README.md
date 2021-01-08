@@ -40,7 +40,7 @@ This project follow the Event Sourcing pattern described on <a href="https://doc
 
 ## 👩‍💻 Project explanation
 
-<p>REST API that, given a famous person and a count N, returns N quotes from this famous person shouted.</p>
+<p>REST API that given a famous person and a count N, returns N quotes from this famous person shouted.</p>
 
 You can:
 
@@ -48,3 +48,155 @@ You can:
 2. Import authors from json to mysql by cli `docker exec -it quotes-php bin/console api:import:authors`
 2. Import quotes from json to mysql by cli `docker exec -it quotes-php bin/console api:import:quotes`
 4. Get shouts by author. [Example Steve Jobs](http://localhost:8082/shout/steve-jobs)  `http://localhost:8082/shout/steve-jobs`
+
+### 🎯 Ports and Adapters / Hexagonal Architecture
+
+This repository follow the Ports and Adapters / Hexagonal Architecture  pattern.
+
+```
+src
+├── Api
+│ ├── Application
+│ │ ├── Command
+│ │ │ ├── ImportAuthors
+│ │ │ │ ├── ImportAuthorsCommand.php
+│ │ │ │ └── ImportAuthorsCommandHandler.php
+│ │ │ └── ImportQuotes
+│ │ │     ├── ImportQuotesCommand.php
+│ │ │     └── ImportQuotesCommandHandler.php
+│ │ └── Query
+│ │     └── GetShoutsByAuthor
+│ │         ├── GetShoutsByAuthorQuery.php
+│ │         ├── GetShoutsByAuthorQueryHandler.php
+│ │         └── GetShoutsByAuthorQueryResponse.php
+│ ├── Domain
+│ │ ├── Event
+│ │ │ ├── Author
+│ │ │ │ └── CreateAuthorSubscriber.php
+│ │ │ ├── Quote
+│ │ │ │ └── CreateQuoteSubscriber.php
+│ │ │ └── Shout
+│ │ │     └── ShoutsByAuthorSubscriber.php
+│ │ └── Model
+│ │     ├── Author
+│ │     │ ├── Author.php
+│ │     │ ├── AuthorCreatedV1.php
+│ │     │ ├── AuthorNotFound.php
+│ │     │ ├── AuthorProjection.php
+│ │     │ └── AuthorRepository.php
+│ │     ├── Quote
+│ │     │ ├── Quote.php
+│ │     │ ├── QuoteCreatedV1.php
+│ │     │ ├── QuoteProjection.php
+│ │     │ └── QuoteRepository.php
+│ │     └── Shout
+│ │         ├── Shout.php
+│ │         ├── ShoutCollection.php
+│ │         └── ShoutsByAuthorRequestedV1.php
+│ └── Infrastructure
+│     ├── Framework
+│     │ └── Symfony
+│     │     └── Kernel.php
+│     ├── Persistence
+│     │ ├── Dbal
+│     │ │ ├── Author
+│     │ │ │ └── DbalAuthorProjection.php
+│     │ │ └── Quote
+│     │ │     └── DbalQuoteProjection.php
+│     │ └── Doctrine
+│     │     ├── Author
+│     │     │ └── DoctrineAuhorRepository.php
+│     │     ├── Quote
+│     │     │ └── DoctrineQuoteRepository.php
+│     │     └── mapping
+│     │         ├── Author.Author.orm.xml
+│     │         └── Quote.Quote.orm.xml
+│     └── UI
+│         ├── Command
+│         │ ├── Author
+│         │ │ └── ImportAuthorsCommand.php
+│         │ └── Quote
+│         │     └── ImportQuotesCommand.php
+│         └── Controller
+│             ├── GetQuotesByAuthor
+│             │ └── GetQuotesByAuthorController.php
+│             └── Ping
+│                 └── PingController.php
+└── Shared
+    ├── Domain
+    │ └── Model
+    │     ├── Aggregate
+    │     │ └── AggregateRoot.php
+    │     ├── Api
+    │     │ └── ApiError.php
+    │     ├── Bus
+    │     │ ├── CommandBus.php
+    │     │ ├── EventBus.php
+    │     │ └── QueryBus.php
+    │     ├── Cache
+    │     │ └── CacheRepository.php
+    │     ├── Command.php
+    │     ├── Event
+    │     │ ├── DomainEvent.php
+    │     │ ├── DomainEventPublisher.php
+    │     │ ├── DomainEventSubscriber.php
+    │     │ ├── EventFailed.php
+    │     │ ├── EventFailedNotFoundException.php
+    │     │ ├── EventFailedStore.php
+    │     │ ├── EventNotPublished.php
+    │     │ ├── EventNotPublishedNotFoundException.php
+    │     │ ├── EventNotPublishedStore.php
+    │     │ ├── EventStore.php
+    │     │ ├── PublishableDomainEvent.php
+    │     │ ├── StoredEvent.php
+    │     │ └── StoredEventNotFoundException.php
+    │     ├── Exception
+    │     │ ├── BadRequestException.php
+    │     │ ├── ConflictException.php
+    │     │ ├── NotFoundException.php
+    │     │ └── ProjectException.php
+    │     ├── Query.php
+    │     └── Serializer
+    │         └── Serializer.php
+    └── Infrastructure
+        ├── Bus
+        │ ├── Custom
+        │ │ └── CustomEventBus.php
+        │ └── League
+        │     ├── CommandBus.php
+        │     ├── CommandBusFactory.php
+        │     ├── CommandBusProvider.php
+        │     ├── DbalTransactionMiddleware.php
+        │     ├── QueryBus.php
+        │     ├── QueryBusFactory.php
+        │     └── QueryBusProvider.php
+        ├── MessageBroker
+        │ ├── Dispatcher.php
+        │ ├── RabbitMq
+        │ │ ├── RabbitMqConfigurer.php
+        │ │ ├── RabbitMqConnection.php
+        │ │ ├── RabbitMqDomainEventsConsumer.php
+        │ │ ├── RabbitMqExchangeNameFormatter.php
+        │ │ ├── RabbitMqFactoryConfigurer.php
+        │ │ ├── RabbitMqFactoryConnection.php
+        │ │ └── RabbitMqPublisher.php
+        │ └── SubscriberMapper.php
+        ├── Persistence
+        │ ├── Dbal
+        │ │ └── Event
+        │ │     ├── DbalEventFailedStore.php
+        │ │     ├── DbalEventNotPublishedStore.php
+        │ │     └── DbalEventStore.php
+        │ ├── FakeCacheRepository.php
+        │ └── Redis
+        │     └── Cache
+        │         └── RedisCacheRepository.php
+        ├── Serializer
+        │ └── PhpSerializer.php
+        └── UI
+            └── Command
+                └── MessageBroker
+                    ├── RabbitMqConfigureCommand.php
+                    ├── RabbitMqConsumeDomainEventsCommand.php
+                    └── RabbitMqUpDomainEventsConsumers.php
+``` 
