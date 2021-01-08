@@ -37,7 +37,7 @@ This project follow the Event Sourcing pattern described on <a href="https://doc
 
 1. Install and configure all the dependencies and bring up the project executing:
    `make dev`
-2. You can execute the tests executing:
+2. Execute the tests executing:
    `make test`
 
 ## 👩‍💻 Project explanation
