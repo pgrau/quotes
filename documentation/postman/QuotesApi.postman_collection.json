@@ -1,0 +1,43 @@
+{
+  "info": {
+    "_postman_id": "6301ff4b-5642-44e1-9c0a-443e0de9fcce",
+    "name": "QuotesApi",
+    "description": "RESTful API for fetching quotes",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Quotes",
+      "item": [
+        {
+          "name": "Get quotes by author",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "host",
+                "value": "{{core-api.host}}"
+              }
+            ],
+            "url": {
+              "raw": "{{quotes-api.uri}}/shout/steve-jobs?limit=10",
+              "host": [
+                "{{quotes-api.uri}}"
+              ],
+              "path": [
+                "shout"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": {}
+    }
+  ],
+  "protocolProfileBehavior": {}
+}

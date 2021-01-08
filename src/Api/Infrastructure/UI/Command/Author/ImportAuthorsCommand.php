@@ -37,6 +37,8 @@ final class ImportAuthorsCommand extends Command
 
         $this->commandBus->dispatch($command);
 
+        $output->writeln('<fg=green>Import authors done</>');
+
         return Command::SUCCESS;
     }
 }

@@ -37,6 +37,8 @@ final class ImportQuotesCommand extends Command
 
         $this->commandBus->dispatch($command);
 
+        $output->writeln('<fg=green>Import quotes done</>');
+
         return Command::SUCCESS;
     }
 }

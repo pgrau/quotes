@@ -8,9 +8,9 @@ use React\EventLoop\Factory;
 $sqlDb = file_get_contents(__DIR__ . '/../../resources/database/mysql/test/database.sql');
 $sqlSchema = file_get_contents(__DIR__ . '/../../resources/database/mysql/schema.sql');
 
-$connectionParams = array(
+$connectionParams = [
     'url' => $_ENV['MYSQL_URL'],
-);
+];
 $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams);
 
 $conn->executeQuery($sqlDb);

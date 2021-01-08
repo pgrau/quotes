@@ -18,6 +18,7 @@ class AuthorCreatedV1 extends DomainEvent implements PublishableDomainEvent
         ?\DateTimeInterface $occurredOn = null
     ) {
         parent::__construct($aggregateId, $eventId, $occurredOn);
+        $this->priority = parent::PRIORITY_LOW;
     }
 
     public function version(): int

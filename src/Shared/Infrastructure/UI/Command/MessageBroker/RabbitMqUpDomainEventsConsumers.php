@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Quote\Shared\Infrastructure\MessageBroker\RabbitMq;
+namespace Quote\Shared\Infrastructure\UI\Command\MessageBroker;
 
 use React\ChildProcess\Process;
 use React\EventLoop\Factory;
@@ -34,6 +34,9 @@ final class RabbitMqUpDomainEventsConsumers extends Command
         $cmd = \sprintf('bin/console rabbitmq:consume %s', $queueName);
         $processes = [];
         for ($i = 1; $i <= $number; $i++) {
+
+            $output->writeln('<fg=green>New consumer up</>');
+
             $processes[$i] = new Process($cmd);
             $processes[$i]->start($loop);
 

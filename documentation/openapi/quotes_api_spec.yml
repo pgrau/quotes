@@ -1,0 +1,54 @@
+openapi: 3.0.0
+
+info:
+  description: |
+    RESTful API to fetching quotes
+  version: 1.0.0
+  title: QUOTES API
+
+paths:
+
+  /shout/{author_id}:
+    get:
+      summary: Get quotes by author
+      description: |
+        Get quotes by author
+      parameters:
+        - in: path
+          name: author_id
+          description: The author id of quotes to return
+          required: true
+          schema:
+            type: string
+            minimum: 1
+            maximum: 255
+        - in: query
+          name: limit
+          description: The numbers of items to return
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10
+            default: 10
+      responses:
+        '200':
+          description: Get quotes by author correctly
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  minLength: 1
+                  maxLength: 1000
+
+              example:
+                - THE ONLY WAY TO DO GREAT WORK IS TO LOVE WHAT YOU DO.
+                - YOUR TIME IS LIMITED, SO DON’T WASTE IT LIVING SOMEONE ELSE’S LIFE!
+        '400':
+          description: Bad Request
+        '404':
+          description: Requested author does not exist
+        '500':
+          description: Unexpected API error
