@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Quote\Api\Infrastructure\UI\Controller\GetQuotesByAuthor;
+namespace Quote\Api\Infrastructure\UI\Controller\GetShoutsByAuthor;
 
 use Quote\Api\Application\Query\GetShoutsByAuthor\GetShoutsByAuthorQuery;
 use Quote\Shared\Domain\Model\Api\ApiError;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class GetQuotesByAuthorController
+class GetShoutsByAuthorController
 {
     public function __construct(private QueryBus $queryBus)
     {

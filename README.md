@@ -210,23 +210,29 @@ All commands are executed with transactional mode
 [Example](src/Api/Infrastructure/UI/Command/Author/ImportAuthorsCommand.php):
 
 ```
-final class ImportAuthorsCommand extends Command
-{
-    ....
+     ...
+     
+     $command = new \Quote\Api\Application\Command\ImportAuthors\ImportAuthorsCommand($data);
 
-    public function __construct(private CommandBus $commandBus)
-    {
-    }
-    
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        ...
-        
-        $command = new \Quote\Api\Application\Command\ImportAuthors\ImportAuthorsCommand($data);
+     $this->commandBus->dispatch($command);
 
-        $this->commandBus->dispatch($command);
+     ...
+```
 
-        ...
-    }
-    
+### Query Bus
+
+We use query bus for all use cases need only read
+
+All queries are executed without transaction
+
+[Example](src/Api/Infrastructure/UI/Controller/GetShoutsByAuthor/GetShoutsByAuthorController.php):
+
+```
+     ...
+     
+     $query = new GetShoutsByAuthorQuery($authorId, (int) $limit);
+
+     $response = $this->queryBus->ask($query)
+
+     ...
 ```
