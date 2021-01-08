@@ -255,3 +255,33 @@ We use event bus for
 
      ...
 ```
+
+###  🔦 Unit Test
+
+This project contain unit tests done by [phpspec](http://www.phpspec.net/en/stable/)
+
+You can see all unit tests done in the follow [folder](tests/spec):
+
+```
+tests/spec
+```
+
+You can execute the tests by the command `make test`
+
+###  🔦 Integration / Functional Test
+
+This project contain integration / functional test tests done by [behat](https://docs.behat.org/en/latest/)
+
+All features are written by Gherkin are on the [folder](features):
+
+```
+features
+```
+
+All Contexts are available  on the [folder](tests/Behat):
+
+```
+tests/Behat
+```
+
+You can execute the tests by the command `make test`
