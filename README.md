@@ -219,7 +219,7 @@ All commands are executed with transactional mode
      ...
 ```
 
-### Query Bus
+### 🎯 Query Bus
 
 We use query bus for all use cases need only read
 
@@ -233,6 +233,25 @@ All queries are executed without transaction
      $query = new GetShoutsByAuthorQuery($authorId, (int) $limit);
 
      $response = $this->queryBus->ask($query)
+
+     ...
+```
+
+### 🎯 Event Bus
+
+We use event bus for
+
+1. Append the domain events to Event Store
+2. Execute subscribers syncronously subscribed to domain events
+3. Publish all domain event to message queue
+4. Execute subscribers asyncronously subscribed to domain events
+
+[Example](src/Api/Application/Command/ImportAuthors/ImportAuthorsCommandHandler.php):
+
+```
+     ...
+     
+            $this->eventBus->publish(...$author->pullDomainEvents());
 
      ...
 ```
