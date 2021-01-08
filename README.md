@@ -12,9 +12,8 @@ This project follow the Event Sourcing pattern described on <a href="https://doc
   </a>
 </p>
 
-
 ### ✔ Project Technology
-<p>This project have the follow features</p>
+<p>This project contains the follow features</p>
 <p>1. The Event Store is the authoritative data source. All events are stored using an append-only operation.</p>
 <p>2. Subscribers build materialized views.</p>
 <p>3. External systems and applications have available all domain events by message queue.</p>
@@ -38,3 +37,14 @@ This project follow the Event Sourcing pattern described on <a href="https://doc
 
 1. Install and configure all the dependencies and bring up the project executing:
    `make dev`
+
+## 👩‍💻 Project explanation
+
+<p>REST API that, given a famous person and a count N, returns N quotes from this famous person shouted.</p>
+
+You can:
+
+1. Verify the [api status](http://localhost:8082) `http://localhost:8082`
+2. Import authors from json to mysql by cli `docker exec -it quotes-php bin/console api:import:authors`
+2. Import quotes from json to mysql by cli `docker exec -it quotes-php bin/console api:import:quotes`
+4. Get shouts by author. [Example Steve Jobs](http://localhost:8082/shout/steve-jobs)  `http://localhost:8082/shout/steve-jobs`
