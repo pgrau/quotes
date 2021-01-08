@@ -20,9 +20,9 @@ This project follow the Event Sourcing pattern described on <a href="https://doc
 
 ### 🖥️ Stack Technology
 
-<p>PHP 8</p>
+<p>PHP 8 - Symfony 5.2</p>
 <p>MySQL 8.0</p>
-<p>RabbitMQ 3.8.9 - Erlang 23.2.1</p>
+<p>RabbitMQ 3.8 - Erlang 23.2</p>
 <p>Redis 6.0</p>
 
 ## 🚀 Environment Setup
