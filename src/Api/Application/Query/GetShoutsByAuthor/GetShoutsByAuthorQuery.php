@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Quote\Api\Application\Query\GetQuotesByAuthor;
+namespace Quote\Api\Application\Query\GetShoutsByAuthor;
 use Quote\Shared\Domain\Model\Query;
 
-final class GetQuotesByAuthorQuery implements Query
+final class GetShoutsByAuthorQuery implements Query
 {
     public function __construct(private string $authorId, private int $limit)
     {

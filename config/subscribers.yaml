@@ -14,8 +14,8 @@ services:
     arguments:
       - '@quote.api.doctrine.dbal.quote.projection'
 
-  quote.api.subscriber.get.quotes.by.author:
-    class: Quote\Api\Domain\Event\Quote\QuotesByAuthorSubscriber
+  quote.api.subscriber.get.shouts.by.author:
+    class: Quote\Api\Domain\Event\Shout\ShoutsByAuthorSubscriber
     arguments:
       - '@redis.repository'
       - '@php.serializer'

@@ -1,12 +1,12 @@
 {
-  "name": "Get quotes by author",
+  "name": "Get shouts by author",
   "method": "GET",
   "pattern": "/shout/{author_id}",
   "parameters": [
     {
       "in": "path",
       "name": "author_id",
-      "description": "The author id of quotes to return",
+      "description": "The author id of shouts to return",
       "required": true,
       "type": "string",
       "minLength": 1,
@@ -26,7 +26,7 @@
   "responses": [
     {
       "code": "200",
-      "description": "Get quotes by author correctly"
+      "description": "Get shouts by author correctly"
     },
     {
       "code": "400",

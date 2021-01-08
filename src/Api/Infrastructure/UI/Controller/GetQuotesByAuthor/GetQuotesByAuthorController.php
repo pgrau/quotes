@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Quote\Api\Infrastructure\UI\Controller\GetQuotesByAuthor;
 
-use Quote\Api\Application\Query\GetQuotesByAuthor\GetQuotesByAuthorQuery;
+use Quote\Api\Application\Query\GetShoutsByAuthor\GetShoutsByAuthorQuery;
 use Quote\Shared\Domain\Model\Api\ApiError;
 use Quote\Shared\Domain\Model\Bus\QueryBus;
 use Quote\Shared\Domain\Model\Exception\BadRequestException;
@@ -26,11 +26,9 @@ class GetQuotesByAuthorController
             $limit = $request->query->get('limit') ?? 10;
             $authorId = $request->get('author_id');
 
-            $query = new GetQuotesByAuthorQuery($authorId, (int) $limit);
+            $query = new GetShoutsByAuthorQuery($authorId, (int) $limit);
 
-            $response = $this->queryBus->ask($query);
-
-            return new JsonResponse($response->toArray());
+            return new JsonResponse($this->queryBus->ask($query)->response());
 
         } catch (BadRequestException|NotFoundException|ConflictException $e) {
 

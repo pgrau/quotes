@@ -7,10 +7,10 @@
   },
   "item": [
     {
-      "name": "Quotes",
+      "name": "Shouts",
       "item": [
         {
-          "name": "Get quotes by author",
+          "name": "Get shouts by author",
           "request": {
             "method": "POST",
             "header": [

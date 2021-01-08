@@ -4,8 +4,8 @@ services:
     autowire: true
     public: true
 
-  quote.api.query.get.quotes.by.author:
-    class: Quote\Api\Application\Query\GetQuotesByAuthor\GetQuotesByAuthorQueryHandler
+  quote.api.query.get.shouts.by.author:
+    class: Quote\Api\Application\Query\GetShoutsByAuthor\GetShoutsByAuthorQueryHandler
     arguments:
       - '@rabbitmq.publisher'
       - '@quote.api.doctrine.author.repository'

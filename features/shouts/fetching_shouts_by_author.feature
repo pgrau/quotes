@@ -1,7 +1,7 @@
-Feature: Get quotes by author
-  In order to see quotes
+Feature: Get shouts by author
+  In order to see shouts
   As a User Api
-  I want to be able to view a collection of quotes filtering by author
+  I want to be able to view a collection of shouts filtering by author
 
   Scenario: Bad request
     Given I send a GET request to "/shout/x-x-x?limit=50"
@@ -34,7 +34,7 @@ Feature: Get quotes by author
     Then the response content should be:
     """
     [
-          "THE ONLY WAY TO DO GREAT WORK IS TO LOVE WHAT YOU DO.",
+          "THE ONLY WAY TO DO GREAT WORK IS TO LOVE WHAT YOU DO!",
           "YOUR TIME IS LIMITED, SO DON\u2019T WASTE IT LIVING SOMEONE ELSE\u2019S LIFE!"
     ]
     """
@@ -45,7 +45,7 @@ Feature: Get quotes by author
     Then the response content should be:
     """
     [
-          "THE ONLY WAY TO DO GREAT WORK IS TO LOVE WHAT YOU DO."
+          "THE ONLY WAY TO DO GREAT WORK IS TO LOVE WHAT YOU DO!"
     ]
     """
     Then the response status code should be 200

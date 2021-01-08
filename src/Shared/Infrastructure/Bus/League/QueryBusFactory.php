@@ -9,8 +9,8 @@ use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
 use League\Tactician\Handler\MethodNameInflector\InvokeInflector;
 use Psr\Container\ContainerInterface;
-use Quote\Api\Application\Query\GetQuotesByAuthor\GetQuotesByAuthorQuery;
-use Quote\Api\Application\Query\GetQuotesByAuthor\GetQuotesByAuthorQueryHandler;
+use Quote\Api\Application\Query\GetShoutsByAuthor\GetShoutsByAuthorQuery;
+use Quote\Api\Application\Query\GetShoutsByAuthor\GetShoutsByAuthorQueryHandler;
 
 final class QueryBusFactory
 {
@@ -37,7 +37,7 @@ final class QueryBusFactory
     private static function map(): array
     {
         return [
-            GetQuotesByAuthorQuery::class => GetQuotesByAuthorQueryHandler::class,
+            GetShoutsByAuthorQuery::class => GetShoutsByAuthorQueryHandler::class,
         ];
     }
 }

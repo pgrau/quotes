@@ -41,4 +41,9 @@ class Quote extends AggregateRoot
     {
         return $this->quote;
     }
+
+    public function toString(): string
+    {
+        return $this->quote();
+    }
 }

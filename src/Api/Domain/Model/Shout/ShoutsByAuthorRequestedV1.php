@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Quote\Api\Domain\Model\Quote;
+namespace Quote\Api\Domain\Model\Shout;
 
 use Quote\Shared\Domain\Model\Event\DomainEvent;
 use Quote\Shared\Domain\Model\Event\PublishableDomainEvent;
 
-class QuotesByAuthorRequestedV1 extends DomainEvent implements PublishableDomainEvent
+class ShoutsByAuthorRequestedV1 extends DomainEvent implements PublishableDomainEvent
 {
-    const EVENT_NAME  = 'quote.api.quotes.by.author.requested.v1';
+    const EVENT_NAME  = 'quote.api.shouts.by.author.requested.v1';
 
     public function __construct(
-        private string $quotes,
+        private string $shouts,
         private string $authorId,
         private int $limit,
         ?string $eventId = null,
@@ -29,7 +29,7 @@ class QuotesByAuthorRequestedV1 extends DomainEvent implements PublishableDomain
     public function payload(): array
     {
         return [
-            'quotes' => $this->quotes,
+            'shouts' => $this->shouts,
             'author_id' => $this->authorId,
             'limit' => $this->limit,
         ];

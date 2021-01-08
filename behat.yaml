@@ -21,8 +21,8 @@ default:
       contexts:
         - Quote\Api\Tests\Behat\ApiContext
 
-    quotes:
-      paths: [ features/quotes ]
+    shouts:
+      paths: [ features/shouts ]
       contexts:
         - Quote\Api\Tests\Behat\ApiContext
         - Quote\Api\Tests\Behat\DatabaseQuoteContext

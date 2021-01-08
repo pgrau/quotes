@@ -6,7 +6,7 @@ namespace Quote\Shared\Infrastructure\MessageBroker;
 
 use Quote\Api\Domain\Model\Author\AuthorCreatedV1;
 use Quote\Api\Domain\Model\Quote\QuoteCreatedV1;
-use Quote\Api\Domain\Model\Quote\QuotesByAuthorRequestedV1;
+use Quote\Api\Domain\Model\Shout\ShoutsByAuthorRequestedV1;
 use Quote\Shared\Domain\Model\Event\DomainEvent;
 
 final class SubscriberMapper
@@ -19,8 +19,8 @@ final class SubscriberMapper
     {
         return [
             AuthorCreatedV1::EVENT_NAME => ['quote.api.subscriber.create.author'],
-            QuotesByAuthorRequestedV1::EVENT_NAME => ['quote.api.subscriber.get.quotes.by.author'],
             QuoteCreatedV1::EVENT_NAME => ['quote.api.subscriber.create.quote'],
+            ShoutsByAuthorRequestedV1::EVENT_NAME => ['quote.api.subscriber.get.shouts.by.author'],
         ];
     }
 
