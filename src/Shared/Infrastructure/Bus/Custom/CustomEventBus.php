@@ -20,9 +20,7 @@ final class CustomEventBus implements EventBus
         private EventStore $eventStore,
         private DomainEventPublisher $publisher,
         private ContainerInterface $container
-    ) {
-        $this->configureSubscribers();
-    }
+    ) {}
 
     public function __clone()
     {
@@ -51,10 +49,5 @@ final class CustomEventBus implements EventBus
         foreach ($subscribers as $subscriber) {
             $this->subscribers[get_class($subscriber)] = $subscriber;
         }
-    }
-
-    private function configureSubscribers()
-    {
-//        $this->subscribers[CreateAuthorSubscriber::class] = $this->container->get('quote.api.subscriber.create.author');
     }
 }

@@ -21,7 +21,7 @@ class AuthorSpec extends ObjectBehavior
         $author = Author::create('Steve Jobs');
 
         $this->beConstructedWith($author->id(), $author->fullName());
-        $this->id()->shouldBe('steve-jobs');
-        $this->fullName()->shouldBe('Steve Jobs');
+        $this->id()->shouldBe($author->id());
+        $this->fullName()->shouldBe($author->fullName());
     }
 }

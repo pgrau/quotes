@@ -29,10 +29,10 @@ CREATE TABLE IF NOT EXISTS `event_store` (
   `is_publishable` tinyint(1) NOT NULL,
   `occurred_on` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `core_store_name_idx` (`name`),
-  KEY `core_store_name_aggregate_idx` (`aggregate_id`,`name`),
-  KEY `core_store_name_occurred_idx` (`name`,`occurred_on`),
-  KEY `core_store_occurred_idx` (`occurred_on`)
+  KEY `event_store_name_idx` (`name`),
+  KEY `event_store_name_aggregate_idx` (`aggregate_id`,`name`),
+  KEY `event_store_name_occurred_idx` (`name`,`occurred_on`),
+  KEY `event_store_occurred_idx` (`occurred_on`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `event_not_published` (
