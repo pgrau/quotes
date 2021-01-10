@@ -205,58 +205,33 @@ src
 
 ### 🎯 Command Bus
 
-We use command bus for all use cases need write
-
-All commands are executed with transactional mode
-
-[Example](src/Api/Infrastructure/UI/Command/Author/ImportAuthorsCommand.php):
-
-```
-     ...
-     
-     $command = new ImportAuthorsCommand($data);
-
-     $this->commandBus->dispatch($command);
-
-     ...
-```
+[Wiki Page](https://github.com/pgrau/quotes/wiki/Command-Bus)
 
 ### 🎯 Query Bus
 
-We use query bus for all use cases need only read
+[Wiki Page](https://github.com/pgrau/quotes/wiki/Query-Bus)
 
-All queries are executed without transaction
+### 🎯 Event Sourcing
 
-[Example](src/Api/Infrastructure/UI/Controller/GetShoutsByAuthor/GetShoutsByAuthorController.php):
+All documentation available on the Wiki:
 
-```
-     ...
-     
-     $query = new GetShoutsByAuthorQuery($authorId, (int) $limit);
+[Event sourcing architecture](https://github.com/pgrau/quotes/wiki/Event-Sourcing-Architecture)    
+    
+[Domain Events](https://github.com/pgrau/quotes/wiki/Domain-Events)
+    
+[Event Store](https://github.com/pgrau/quotes/wiki/Event-Store)
 
-     $response = $this->queryBus->ask($query)
+[Event Bus](https://github.com/pgrau/quotes/wiki/Event-Bus)
 
-     ...
-```
+[Message Broker](https://github.com/pgrau/quotes/wiki/Message-Broker)
 
-### 🎯 Event Bus
+[Consumer](https://github.com/pgrau/quotes/wiki/Consumer)
 
-We use event bus for
+[Event Dispatcher](https://github.com/pgrau/quotes/wiki/Consumer)
 
-1. Append the domain events to Event Store
-2. Execute subscribers syncronously subscribed to domain events
-3. Publish all domain event to message queue
-4. Execute subscribers asyncronously subscribed to domain events
+[Subscriber](https://github.com/pgrau/quotes/wiki/Subscriber)
 
-[Example](src/Api/Application/Command/ImportAuthors/ImportAuthorsCommandHandler.php):
-
-```
-     ...
-     
-            $this->eventBus->publish(...$author->pullDomainEvents());
-
-     ...
-```
+[Installation](https://github.com/pgrau/quotes/wiki/Installation)
 
 ###  🔦 Unit Test
 
