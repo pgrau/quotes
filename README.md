@@ -93,32 +93,9 @@ All documentation available on the Wiki:
 
 [Installation](https://github.com/pgrau/quotes/wiki/Installation)
 
-###  🔦 Unit Test
+###  🔦 Unit / Integration / Functional Test
 
-This project contain unit tests done by [phpspec](http://www.phpspec.net/en/stable/)
+[Phpspec](https://github.com/pgrau/quotes/wiki/phpspec)
 
-You can see all unit tests done in the follow [folder](tests/spec):
+[Behat](https://github.com/pgrau/quotes/wiki/phpspec)
 
-```
-tests/spec
-```
-
-You can execute the tests by the command `make test`
-
-###  🔦 Integration / Functional Test
-
-This project contain integration / functional test tests done by [behat](https://docs.behat.org/en/latest/)
-
-All features are written by Gherkin are on the [folder](features):
-
-```
-features
-```
-
-All Contexts are available  on the [folder](tests/Behat):
-
-```
-tests/Behat
-```
-
-You can execute the tests by the command `make test`
