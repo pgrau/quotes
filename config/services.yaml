@@ -123,6 +123,10 @@ services:
     php.serializer:
         class: Quote\Shared\Infrastructure\Serializer\PhpSerializer
 
+    # Listener check all controller calls.
+    Except:
+        class: Quote\Api\Infrastructure\Framework\Symfony\ExceptionSubscriber
+
 imports:
     - { resource: controllers.yaml }
     - { resource: commands.yaml }

@@ -55,7 +55,9 @@ foreach ($commands as $i => $command) {
         echo $chunk;
     });
 
-    sleep(2);
+    if ($i < 4) {
+        sleep(4);
+    }
 }
 
 $loop->run();
