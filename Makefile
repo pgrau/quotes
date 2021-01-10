@@ -10,6 +10,10 @@ test: composer-env-file
 	docker exec -it quotes-php ./vendor/bin/phpspec run
 	docker exec -it quotes-php ./vendor/bin/behat
 
+test_pipeline: composer-env-file
+	docker exec quotes-php ./vendor/bin/phpspec run
+	docker exec quotes-php ./vendor/bin/behat
+
 # 🐳 Docker Compose
 .PHONY: start
 start: composer-env-file
