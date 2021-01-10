@@ -51,6 +51,14 @@ You can:
 2. Import quotes from json to mysql by cli `docker exec -it quotes-php bin/console api:import:quotes`
 4. Get shouts by author. [Example Steve Jobs](http://localhost:8082/shout/steve-jobs)  `http://localhost:8082/shout/steve-jobs`
 
+### 🎯 API Documentation
+
+[Contracts](https://github.com/pgrau/quotes/wiki/Contract)
+
+[OpenAPI Specification](https://github.com/pgrau/quotes/wiki/OpenAPI)
+
+[Postman Collection](https://github.com/pgrau/quotes/wiki/Postman)
+
 ### 🎯 Ports and Adapters / Hexagonal Architecture
 
 [Wiki Page](https://github.com/pgrau/quotes/wiki/Hexagonal-Architecture)
