@@ -2,7 +2,7 @@
 Quotes API  </br> Ports and Adapters, DDD, CQRS & <br/> Event Driven Architecture  in PHP
 </h1>
 
-<p align="center">![Continuous Integration](https://github.com/pgrau/quotes/workflows/Continuous%20Integration/badge.svg)</p>
+![Continuous Integration](https://github.com/pgrau/quotes/workflows/Continuous%20Integration/badge.svg)
 
 <p align="left">
 This project follow the Event Sourcing pattern described on <a href="https://docs.microsoft.com/en-us/azure/architecture/patterns/event-sourcing"/>Microsoft Site</a>.
