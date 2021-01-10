@@ -12,7 +12,7 @@
         {
           "name": "Get shouts by author",
           "request": {
-            "method": "POST",
+            "method": "GET",
             "header": [
               {
                 "key": "Content-Type",
