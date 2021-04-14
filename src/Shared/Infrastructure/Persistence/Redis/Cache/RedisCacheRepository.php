@@ -21,7 +21,7 @@ class RedisCacheRepository implements CacheRepository
     {
         $response = false;
         if ($data = $this->redis->get($key)) {
-            $response = @unserialize($key);
+            $response = @unserialize($data);
         }
 
         return $response;
